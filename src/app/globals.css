@@ -2,641 +2,201 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Essential animation definitions */
-@keyframes gridMove {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 40px 40px;
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes pulse-slow {
-  0% {
-    opacity: 0.2;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.3;
-    transform: scale(1.03);
-  }
-  100% {
-    opacity: 0.2;
-    transform: scale(1);
-  }
-}
-
-@keyframes pulse-slower {
-  0% {
-    opacity: 0.1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.2;
-    transform: scale(1.02);
-  }
-  100% {
-    opacity: 0.1;
-    transform: scale(1);
-  }
-}
-
-.animate-pulse {
-  animation: pulse 4s ease-in-out infinite;
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 6s ease-in-out infinite;
-}
-
-.animate-pulse-slower {
-  animation: pulse-slower 8s ease-in-out infinite;
-}
-
-.retro-grid {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, rgba(255, 113, 74, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 113, 74, 0.15) 1px, transparent 1px);
-  transform: perspective(1000px) rotateX(60deg);
-  transform-origin: center bottom;
-  animation: gridMove 20s linear infinite;
-}
-
-.perspective-element {
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  transform-origin: center bottom;
-}
-
+/* Base Layer - Define CSS Variables for Theming */
 @layer base {
   :root {
-    /* Updated color palette with more orange/red tones for synthwave aesthetic */
-    --color-brand-dark-blue: #09031d;
-    --color-brand-dark: #0b0225;
-    --color-brand-purple: #7b5aff;
-    --color-brand-magenta: #e64980;
-    --color-brand-yellow: #ffd166;
+    /* Light Theme Variables */
+    --background: 255 255 255; /* White */
+    --foreground: 11 2 37;   /* Dark (based on brand-dark) */
+    --card-bg: 248 250 252; /* Slate 50 */
+    --card-border: 226 232 240; /* Slate 200 */
+    --primary: 255 113 74; /* #FF714A (sunset-orange) */
+    --secondary: 123 90 255; /* #7B5AFF (neon-purple) */
+    --accent: 255 56 100; /* #FF3864 (sunset-pink) */
+    --text-primary: 15 23 42; /* Slate 900 */
+    --text-secondary: 71 85 105; /* Slate 500 */
+    --muted: 226 232 240; /* Slate 200 */
+    --glass-bg: 255 255 255 / 0.6;
+    --glass-border: 255 255 255 / 0.2;
 
-    /* New synthwave/vaporwave palette */
-    --color-neon-purple: #7b5aff;
-    --color-neon-blue: #24d3ff;
-    --color-neon-pink: #ff71ce;
-    --color-neon-green: #05faa1;
-    --color-neon-yellow: #fffb96;
-    --color-neon-orange: #ff9e64;
-    --color-sunset-orange: #ff714a;
-    --color-sunset-pink: #ff3864;
+    /* Accurate Neon/Nature Palette from README */
+    --neon-yellow: 255 255 0; /* #FFFF00 */
+    --neon-pink: 255 0 255;   /* #FF00FF */
+    --neon-blue: 0 255 255;   /* #00FFFF */
+    --nature-green: 0 255 0; /* #00FF00 */
+    --nature-orange: 255 165 0;/* #FFA500 */
+    --nature-purple: 128 0 128; /* #800080 */
 
-    /* Adjusted text colors */
-    --color-text: #f0f0f0;
-    --color-text-secondary: #b0b0b0;
+    /* Keep other distinct colors */
+    --sunset-orange: 255 113 74; /* #FF714A */
+    --sunset-pink: 255 56 100;   /* #FF3864 */
+    --neon-purple: 123 90 255;   /* #7B5AFF */
+  }
 
-    /* Font sizes using rem for better responsiveness */
-    --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.125rem;
-    --font-size-xl: 1.25rem;
-    --font-size-2xl: 1.5rem;
-    --font-size-3xl: 1.875rem;
-    --font-size-4xl: 2.25rem;
-    --font-size-5xl: 3rem;
-    --font-size-6xl: 3.75rem;
-
-    /* Spacing using rem */
-    --spacing-1: 0.25rem;
-    --spacing-2: 0.5rem;
-    --spacing-3: 0.75rem;
-    --spacing-4: 1rem;
-    --spacing-6: 1.5rem;
-    --spacing-8: 2rem;
-    --spacing-12: 3rem;
-    --spacing-16: 4rem;
-    --spacing-24: 6rem;
+  .dark {
+    /* Dark Theme Variables */
+    --background: 9 3 29;      /* #09031D */
+    --foreground: 240 240 240; /* Slightly off-white */
+    --card-bg: 11 2 37 / 0.3;  /* #0B0225 with alpha */
+    --card-border: 255 255 255 / 0.1;
+    --primary: 255 113 74;      /* #FF714A (sunset-orange) - Keep consistent primary */
+    --secondary: 123 90 255;    /* #7B5AFF (neon-purple) - Keep consistent secondary */
+    --accent: 255 56 100;      /* #FF3864 (sunset-pink) - Keep consistent accent */
+    --text-primary: 240 240 240;
+    --text-secondary: 176 176 176;
+    --muted: 255 255 255 / 0.1;
+    --glass-bg: 0 0 0 / 0.2;
+    --glass-border: 255 255 255 / 0.05;
+    /* Neon/Nature palette is inherited from :root */
   }
 
   body {
-    color: var(--color-text);
-    background: linear-gradient(to bottom, #09031d, #220d36, #09031d);
+    color: rgb(var(--text-primary));
+    background-color: rgb(var(--background));
     min-height: 100vh;
     overflow-x: hidden;
     font-family: "Ubuntu", "Ubuntu Nerd Font Propo", sans-serif;
   }
 
-  /* Typography system with JetBrains Mono for headings */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
     font-family: "JetBrains Mono", "JetBrainsMono NFP", monospace;
     letter-spacing: -0.025em;
+    color: rgb(var(--foreground)); /* Use foreground for headings */
   }
+   h1 { font-size: 3.75rem; line-height: 1.2; } /* 6xl */
+   h2 { font-size: 3rem; line-height: 1.25; } /* 5xl */
+   h3 { font-size: 2.25rem; line-height: 1.3; } /* 4xl */
+   h4 { font-size: 1.875rem; line-height: 1.35; } /* 3xl */
+   h5 { font-size: 1.5rem; line-height: 1.4; } /* 2xl */
+   h6 { font-size: 1.25rem; line-height: 1.4; } /* xl */
+   p { font-size: 1rem; line-height: 1.6; color: rgb(var(--text-secondary)); } /* base */
 
-  /* Common text sizes - using rem for better responsive behavior */
-  h1 {
-    font-size: var(--font-size-5xl);
-    line-height: 1.2;
-  }
-  h2 {
-    font-size: var(--font-size-4xl);
-    line-height: 1.25;
-  }
-  h3 {
-    font-size: var(--font-size-3xl);
-    line-height: 1.3;
-  }
-  h4 {
-    font-size: var(--font-size-2xl);
-    line-height: 1.35;
-  }
-  h5 {
-    font-size: var(--font-size-xl);
-    line-height: 1.4;
-  }
-  h6 {
-    font-size: var(--font-size-lg);
-    line-height: 1.4;
-  }
-
-  p {
-    font-size: var(--font-size-base);
-    line-height: 1.6;
-  }
-
-  /* Define light/dark mode overrides if needed */
-  [data-theme="dark"] {
-    /* Dark theme specific variables */
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 640px) {
-    h1 {
-      font-size: var(--font-size-4xl);
-    }
-    h2 {
-      font-size: var(--font-size-3xl);
-    }
-    h3 {
-      font-size: var(--font-size-2xl);
-    }
-    h4 {
-      font-size: var(--font-size-xl);
-    }
-  }
+   @media (max-width: 640px) {
+      h1 { font-size: 3rem; }
+      h2 { font-size: 2.25rem; }
+      h3 { font-size: 1.875rem; }
+      h4 { font-size: 1.5rem; }
+   }
 }
 
+/* Components Layer */
 @layer components {
-  /* Max width for container updated to wider width */
+  /* Updated container */
   .container-wide {
     max-width: 1600px;
     width: 100%;
-    margin: 0 auto;
-    padding: 0 2rem;
-    position: relative;
-    z-index: 10;
-  }
-
-  .naturewave-text {
-    @apply font-mono text-neon-yellow;
-  }
-
-  .naturewave-heading {
-    @apply font-mono text-neon-pink;
-  }
-
-  .naturewave-accent {
-    @apply text-neon-blue;
-  }
-
-  /* Numbered section headings for consistent styling */
-  .numbered-heading {
-    @apply relative flex items-start;
-  }
-
-  .numbered-heading .number {
-    @apply font-mono text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-sunset-orange;
-  }
-
-  .numbered-heading .line {
-    @apply w-32 h-px bg-gradient-to-r from-sunset-orange to-transparent mt-5;
-  }
-
-  /* Vaporwave/synthwave geometric elements */
-  .geometric-element {
-    position: absolute;
-    z-index: 1;
-    opacity: 0.7;
-    pointer-events: none;
-  }
-
-  .floating-circle {
-    animation: pulse-glow 8s ease-in-out infinite;
-  }
-
-  .floating-triangle {
-    animation: float 12s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px rgba(255, 113, 74, 0.5));
-  }
-
-  .floating-square {
-    animation: float-reverse 15s ease-in-out infinite;
-    filter: drop-shadow(0 0 8px rgba(36, 211, 255, 0.4));
-  }
-
-  .grid-lines {
-    @apply absolute inset-0;
-    background-size: 100px 100px;
-    background-image:
-      linear-gradient(to right, rgba(36, 211, 255, 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(36, 211, 255, 0.1) 1px, transparent 1px);
-    transform: perspective(1000px) rotateX(60deg);
-    transform-origin: center bottom;
-    opacity: 0.2;
-  }
-
-  @keyframes float {
-    0% {
-      transform: translateY(0px) rotate(0deg);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* Smaller padding */
+    padding-right: 1rem; /* Smaller padding */
+    @screen sm {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
     }
-    50% {
-      transform: translateY(-20px) rotate(5deg);
-    }
-    100% {
-      transform: translateY(0px) rotate(0deg);
+    @screen lg {
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
   }
 
-  @keyframes float-reverse {
-    0% {
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-      transform: translateY(-15px) rotate(-5deg);
-    }
-    100% {
-      transform: translateY(0px) rotate(0deg);
-    }
+  /* Updated Glass effect using CSS Variables */
+  .glass {
+    background-color: rgb(var(--glass-bg));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(var(--glass-border));
   }
 
-  @keyframes pulse-glow {
-    0% {
-      opacity: 0.4;
-      filter: blur(8px);
-    }
-    50% {
-      opacity: 0.8;
-      filter: blur(12px);
-    }
-    100% {
-      opacity: 0.4;
-      filter: blur(8px);
-    }
+  /* Gradient text utilities - using theme colors */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+  }
+  .gradient-text-primary {
+    @apply bg-gradient-to-r from-primary via-accent to-secondary; /* Example gradient */
+  }
+  .gradient-text-secondary {
+     @apply bg-gradient-to-r from-secondary to-neon-blue; /* Another example */
   }
 
-  /* Card with neon glow */
-  .card-with-glow {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    position: relative;
-    transition: all 0.4s ease;
+  /* Buttons using theme variables */
+  .button {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none;
   }
-
-  .card-with-glow:hover {
-    transform: translateY(-10px);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.3);
-  }
-
-  .card-with-glow.blue-glow::before {
-    box-shadow: 0 0 25px 2px rgba(36, 211, 255, 0.3);
-  }
-
-  .card-with-glow.magenta-glow::before {
-    box-shadow: 0 0 25px 2px rgba(255, 71, 206, 0.3);
-  }
-
-  .card-with-glow.purple-glow::before {
-    box-shadow: 0 0 25px 2px rgba(123, 90, 255, 0.3);
-  }
-
-  .card-with-glow.orange-glow::before {
-    box-shadow: 0 0 25px 2px rgba(255, 113, 74, 0.3);
-  }
-
-  .card-with-glow.yellow-glow:hover {
-    box-shadow:
-      0 0.75rem 1.5rem rgba(0, 0, 0, 0.2),
-      0 0 1.5rem rgba(255, 200, 58, 0.25);
-    border-color: rgba(255, 200, 58, 0.3);
-  }
-
-  .card-with-glow.green-glow:hover {
-    box-shadow:
-      0 0.75rem 1.5rem rgba(0, 0, 0, 0.2),
-      0 0 1.5rem rgba(54, 249, 213, 0.25);
-    border-color: rgba(54, 249, 213, 0.3);
-  }
-
-  /* Custom utility classes for service cards */
-  .service-card-glow {
-    @apply transition-all duration-300;
-    border-radius: 0.625rem;
-  }
-
-  .service-card-glow:hover {
-    box-shadow: 0 0 1.5rem rgba(255, 113, 74, 0.25);
-    transform: translateY(-0.25rem);
-  }
-
+  /* Define text color for light mode primary button */
   .button-primary {
-    @apply bg-gradient-to-r from-sunset-orange to-sunset-pink text-white;
+    @apply bg-primary text-white shadow-md hover:opacity-90 hover:-translate-y-0.5;
   }
-
-  .button-primary:hover {
-    @apply from-sunset-pink to-neon-purple shadow-lg transform -translate-y-0.5;
-    box-shadow: 0 5px 15px rgba(255, 56, 100, 0.4);
+  .dark .button-primary {
+     @apply text-white; /* Ensure text is white in dark mode */
+  }
+  .light .button-primary {
+      @apply text-white; /* Ensure text is white in light mode too, or choose contrast color */
   }
 
   .button-secondary {
-    @apply border border-white/10 bg-white/5 text-white backdrop-blur-sm hover:bg-white/10 hover:border-white/20 hover:shadow-lg hover:-translate-y-0.5 transition-all;
+    @apply border border-primary text-primary hover:bg-primary/10 hover:-translate-y-0.5;
+  }
+  .button-ghost {
+     @apply text-primary hover:bg-primary/10;
+  }
+  .button-destructive {
+    @apply bg-red-600 text-white hover:bg-red-700;
   }
 
-  /* RetroGrid background */
-  .retro-grid {
+  /* Custom scrollbar using theme colors */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: rgb(var(--background) / 0.5); }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, rgb(var(--primary)), rgb(var(--accent))); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, rgb(var(--primary) / 0.8), rgb(var(--accent) / 0.8)); }
+
+  /* Ensure retro-grid uses appropriate theme colors */
+   .retro-grid {
     position: absolute;
     width: 100%;
     height: 100%;
     background-size: 40px 40px;
+    /* Use theme colors */
     background-image:
-      linear-gradient(to right, rgba(255, 113, 74, 0.15) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 113, 74, 0.15) 1px, transparent 1px);
+      linear-gradient(to right, rgb(var(--primary) / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--primary) / 0.1) 1px, transparent 1px);
     transform: perspective(1000px) rotateX(60deg);
     transform-origin: center bottom;
     animation: gridMove 20s linear infinite;
   }
 
-  .retro-grid-lines {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform: rotateX(60deg);
-    transform-origin: center bottom;
-    background-image:
-      linear-gradient(to right, rgba(255, 113, 74, 0.15) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 113, 74, 0.15) 1px, transparent 1px);
-    background-size: 80px 80px;
-  }
-
-  /* Perspective element for synthwave grid */
-  .perspective-element {
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    transform-origin: center bottom;
-  }
-
-  /* Mesh gradient backgrounds */
-  .mesh-gradient-1 {
-    @apply absolute inset-0 opacity-40 -z-10;
-    background:
-      radial-gradient(
-        circle at 15% 50%,
-        rgba(255, 113, 74, 0.15),
-        transparent 25%
-      ),
-      radial-gradient(
-        circle at 85% 30%,
-        rgba(255, 56, 100, 0.15),
-        transparent 25%
-      ),
-      radial-gradient(
-        circle at 50% 80%,
-        rgba(36, 211, 255, 0.15),
-        transparent 25%
-      );
-    filter: blur(40px);
-  }
-
-  /* Animated Geometric Shapes */
-  .geometric-shapes {
-    @apply absolute inset-0 overflow-hidden pointer-events-none -z-10;
-  }
-
-  .geometric-shapes::before {
-    content: "";
-    @apply absolute w-40 h-40 top-1/4 left-1/4 rounded-full;
-    background: radial-gradient(
-      circle,
-      rgba(255, 113, 74, 0.2),
-      transparent 70%
-    );
-    animation: float 20s ease-in-out infinite;
-  }
-
-  .geometric-shapes::after {
-    content: "";
-    @apply absolute w-60 h-60 bottom-1/4 right-1/4;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    background: radial-gradient(
-      circle,
-      rgba(255, 56, 100, 0.2),
-      transparent 70%
-    );
-    animation: float-reverse 25s ease-in-out infinite;
-  }
-
-  /* Text styles */
-  .text-gradient {
-    @apply text-transparent bg-clip-text;
-  }
-
-  .text-gradient-orange {
-    @apply bg-gradient-to-r from-sunset-orange via-sunset-pink to-neon-pink;
-  }
-
-  .text-gradient-blue {
-    @apply bg-gradient-to-r from-neon-blue via-neon-purple to-sunset-pink;
-  }
-
-  /* Make diagonal transitions more dramatic */
-  .section-divider {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 150px;
-    transform: skewY(-5deg);
-    z-index: 1;
-    overflow: hidden;
-  }
-
-  /* Button styles */
-  .button {
-    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium transition-all duration-200;
-  }
-
-  .button-primary {
-    @apply bg-gradient-to-r from-sunset-orange to-sunset-pink text-white shadow-md;
-  }
-
-  .button-primary:hover {
-    @apply from-sunset-pink to-neon-purple shadow-lg -translate-y-1;
-    box-shadow: 0 5px 15px rgba(255, 56, 100, 0.4);
-  }
-
-  .button-secondary {
-    @apply border border-white/10 bg-white/5 text-white backdrop-blur-sm hover:bg-white/10 hover:border-white/20 hover:shadow-lg hover:-translate-y-1 transition-all;
-  }
-
-  @keyframes gridMove {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 40px 40px;
-    }
-  }
-
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 0.6;
-    }
-    50% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes pulse-slow {
-    0% {
-      opacity: 0.2;
-    }
-    50% {
-      opacity: 0.3;
-    }
-    100% {
-      opacity: 0.2;
-    }
-  }
-
-  @keyframes pulse-slower {
-    0% {
-      opacity: 0.1;
-    }
-    50% {
-      opacity: 0.2;
-    }
-    100% {
-      opacity: 0.1;
-    }
-  }
-
-  .animate-pulse {
-    animation: pulse 4s ease-in-out infinite;
-  }
-
-  .animate-pulse-slow {
-    animation: pulse-slow 6s ease-in-out infinite;
-  }
-
-  .animate-pulse-slower {
-    animation: pulse-slower 8s ease-in-out infinite;
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-glow {
-    animation: glow 4s ease-in-out infinite;
-  }
-
-  /* Glass effect utilities */
-  .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .glass-dark {
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  /* Gradient text utilities */
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r;
-  }
-
-  .gradient-border {
-    position: relative;
-  }
-
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    background: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to));
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, rgba(255,113,74,0.8), rgba(255,56,100,0.8));
-    border-radius: 5px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, rgba(255,113,74,1), rgba(255,56,100,1));
-  }
-
-  .animate-gridMove {
-    animation: gridMove 20s linear infinite;
-  }
+  /* ... rest of existing component styles ... */
 }
 
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(255,113,74,0.6),
-                0 0 40px rgba(255,113,74,0.4);
+/* Utilities Layer - Add spin animation */
+@layer utilities {
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-  50% {
-    box-shadow: 0 0 40px rgba(255,113,74,0.8),
-                0 0 80px rgba(255,113,74,0.6);
+  /* ... existing keyframes ... */
+  @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 40px 40px; } }
+  @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  @keyframes pulse-slow { 0% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.03); } 100% { opacity: 0.2; transform: scale(1); } }
+  @keyframes pulse-slower { 0% { opacity: 0.1; transform: scale(1); } 50% { opacity: 0.2; transform: scale(1.02); } 100% { opacity: 0.1; transform: scale(1); } }
+  @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+  @keyframes float-reverse { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(-5deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+  @keyframes pulse-glow { 0% { opacity: 0.4; filter: blur(8px); } 50% { opacity: 0.8; filter: blur(12px); } 100% { opacity: 0.4; filter: blur(8px); } }
+  @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgb(var(--primary) / 0.6), 0 0 40px rgb(var(--primary) / 0.4); } 50% { box-shadow: 0 0 40px rgb(var(--primary) / 0.8), 0 0 80px rgb(var(--primary) / 0.6); } }
+
+  /* Add animation utility class */
+  .animate-spin {
+     animation: spin 1s linear infinite; /* Default duration, adjust as needed */
   }
+
+  .animate-pulse { animation: pulse 4s ease-in-out infinite; }
+  .animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
+  .animate-pulse-slower { animation: pulse-slower 8s ease-in-out infinite; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-glow { animation: glow 4s ease-in-out infinite; }
+  .animate-gridMove { animation: gridMove 20s linear infinite; }
 }

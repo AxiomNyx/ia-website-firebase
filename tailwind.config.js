@@ -5,52 +5,62 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "class",
+  darkMode: "class", // Keep this
   theme: {
     extend: {
       colors: {
-        // Updated brand palette with exact hex codes
-        brand: {
-          "dark-blue": "#09031D",
-          dark: "#0B0225",
-          purple: "#7B5AFF",
-          magenta: "#E64980",
-          yellow: "#FFD166",
+        // Theme colors mapped from CSS variables
+        background: 'rgb(var(--background) / <alpha-value>)',
+        foreground: 'rgb(var(--foreground) / <alpha-value>)',
+        primary: 'rgb(var(--primary) / <alpha-value>)',
+        secondary: 'rgb(var(--secondary) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        muted: 'rgb(var(--muted) / <alpha-value>)',
+        card: {
+          DEFAULT: 'rgb(var(--card-bg) / <alpha-value>)',
+          border: 'rgb(var(--card-border) / <alpha-value>)',
         },
-        // Updated Neon palette
+        text: {
+          DEFAULT: 'rgb(var(--text-primary) / <alpha-value>)',
+          primary: 'rgb(var(--text-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+        },
+        glass: {
+          bg: 'rgb(var(--glass-bg) / <alpha-value>)',
+          border: 'rgb(var(--glass-border) / <alpha-value>)',
+        },
+        // Accurate Neon/Nature Palette
         neon: {
-          purple: "#7B5AFF",
-          blue: "#24D3FF",
-          pink: "#FF71CE",
-          green: "#05FAA1",
-          yellow: "#FFFB96",
-          orange: "#FF9E64",
+          yellow: 'rgb(var(--neon-yellow) / <alpha-value>)',
+          pink: 'rgb(var(--neon-pink) / <alpha-value>)',
+          blue: 'rgb(var(--neon-blue) / <alpha-value>)',
+          purple: 'rgb(var(--neon-purple) / <alpha-value>)', // Added neon-purple
         },
-        // Synthwave colors
-        sunset: {
-          orange: "#FF714A",
-          pink: "#FF3864",
-        },
-        // Keeping the nature colors for backward compatibility
         nature: {
-          green: "#05FAA1",
-          orange: "#FF714A",
-          purple: "#7B5AFF",
+            green: 'rgb(var(--nature-green) / <alpha-value>)',
+            orange: 'rgb(var(--nature-orange) / <alpha-value>)',
+            purple: 'rgb(var(--nature-purple) / <alpha-value>)',
         },
-        "background-start": "rgb(var(--background-start-rgb))",
-        "background-end": "rgb(var(--background-end-rgb))",
-        foreground: "rgb(var(--foreground-rgb))",
+        sunset: {
+          orange: 'rgb(var(--sunset-orange) / <alpha-value>)',
+          pink: 'rgb(var(--sunset-pink) / <alpha-value>)',
+        },
       },
       fontFamily: {
-        sans: ["UbuntuSans", "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ["JetBrainsMono NFP", "ui-monospace", "monospace"],
-        legend: ["Legend", "sans-serif"],
+        sans: ["Ubuntu", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "JetBrainsMono NFP", "ui-monospace", "monospace"],
+        legend: ["Legend", "sans-serif"], // Keep Legend font
       },
+      maxWidth: {
+        '8xl': '1600px', // Keep max-w-8xl for 1600px
+      },
+      // Keep existing backgroundImage, keyframes, etc.
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      // Keyframes and animations can be kept if defined correctly in globals.css @layer utilities
     },
   },
   plugins: [],

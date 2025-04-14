@@ -12,7 +12,6 @@ import {
 } from "react-icons/fa";
 
 export default function Services() {
-  // Services data with a vibrant color palette including orange, blue, pink, green, and yellow tones
   const servicesList = [
     {
       title: "Graphic Design",
@@ -23,6 +22,7 @@ export default function Services() {
       titleGradient: "from-neon-orange to-sunset-orange",
       cardBg: "bg-black/30",
       delay: 0.1,
+      shadowColor: "shadow-neon-orange/30", // Added for potential hover shadow
     },
     {
       title: "Web Development",
@@ -33,6 +33,7 @@ export default function Services() {
       titleGradient: "from-neon-blue to-neon-purple",
       cardBg: "bg-black/30",
       delay: 0.2,
+      shadowColor: "shadow-neon-blue/30", // Added for potential hover shadow
     },
     {
       title: "Mobile Solutions",
@@ -43,6 +44,7 @@ export default function Services() {
       titleGradient: "from-sunset-pink to-neon-purple",
       cardBg: "bg-black/30",
       delay: 0.3,
+      shadowColor: "shadow-sunset-pink/30", // Added for potential hover shadow
     },
     {
       title: "Digital Marketing",
@@ -53,6 +55,7 @@ export default function Services() {
       titleGradient: "from-neon-orange to-sunset-orange",
       cardBg: "bg-black/30",
       delay: 0.4,
+      shadowColor: "shadow-neon-orange/30", // Added for potential hover shadow
     },
     {
       title: "SEO Optimization",
@@ -63,6 +66,7 @@ export default function Services() {
       titleGradient: "from-neon-green to-neon-blue",
       cardBg: "bg-black/30",
       delay: 0.5,
+      shadowColor: "shadow-neon-green/30", // Added for potential hover shadow
     },
     {
       title: "Analytics & Insights",
@@ -73,6 +77,7 @@ export default function Services() {
       titleGradient: "from-neon-yellow to-neon-orange",
       cardBg: "bg-black/30",
       delay: 0.6,
+      shadowColor: "shadow-neon-yellow/30", // Added for potential hover shadow
     },
   ];
 
@@ -114,28 +119,41 @@ export default function Services() {
           {servicesList.map((service, index) => (
             <motion.div
               key={index}
+              // Entrance animation
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: service.delay }}
               viewport={{ once: true }}
-              className={`${service.cardBg} backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden p-6 hover:border-white/20 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-black/30`}
+              // Hover animation
+              whileHover={{
+                y: -8, // Move card up
+                scale: 1.03, // Slightly scale up
+                boxShadow: "0px 15px 25px rgba(0, 0, 0, 0.5)", // Enhanced shadow
+              }}
+              // Base styles (removed hover:shadow-lg, hover:-translate-y-2, transition-all, duration-300)
+              className={`${service.cardBg} backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden p-6 hover:border-white/20`}
             >
               <div className="mb-4">
-                <div className="w-10 h-10 flex items-center justify-center rounded-md bg-gradient-to-br from-[#09031D] to-black/50 border border-white/10">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }} // Added slight hover effect to icon container
+                  className="w-10 h-10 flex items-center justify-center rounded-md bg-gradient-to-br from-[#09031D] to-black/50 border border-white/10"
+                >
                   <service.icon className={`text-xl ${service.iconColor}`} />
-                </div>
+                </motion.div>
               </div>
 
-              <h3
+              <motion.h3 // Added motion prefix
+                whileHover={{ x: 5 }} // Added slight hover effect to title
                 className={`text-xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r ${service.titleGradient}`}
               >
                 {service.title}
-              </h3>
+              </motion.h3>
 
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
                 {service.description}
               </p>
 
+              {/* Link - Consider adding hover effect here too */}
               <a
                 href="#"
                 className={`inline-flex items-center text-xs ${service.iconColor} hover:underline transition-all duration-300`}
