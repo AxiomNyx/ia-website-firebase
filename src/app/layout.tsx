@@ -53,7 +53,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       {/* Apply the sans font variable as the default body font */}
-      <body className="font-sans">
+       <body className="font-sans">
         <RootLayoutWrapper ubuntu={ubuntu} jetbrains={jetbrains}>
           {children}
         </RootLayoutWrapper>
