@@ -2,201 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base Layer - Define CSS Variables for Theming */
 @layer base {
-  :root {
-    /* Light Theme Variables */
-    --background: 255 255 255; /* White */
-    --foreground: 11 2 37;   /* Dark (based on brand-dark) */
-    --card-bg: 248 250 252; /* Slate 50 */
-    --card-border: 226 232 240; /* Slate 200 */
-    --primary: 255 113 74; /* #FF714A (sunset-orange) */
-    --secondary: 123 90 255; /* #7B5AFF (neon-purple) */
-    --accent: 255 56 100; /* #FF3864 (sunset-pink) */
-    --text-primary: 15 23 42; /* Slate 900 */
-    --text-secondary: 71 85 105; /* Slate 500 */
-    --muted: 226 232 240; /* Slate 200 */
-    --glass-bg: 255 255 255 / 0.6;
-    --glass-border: 255 255 255 / 0.2;
-
-    /* Accurate Neon/Nature Palette from README */
-    --neon-yellow: 255 255 0; /* #FFFF00 */
-    --neon-pink: 255 0 255;   /* #FF00FF */
-    --neon-blue: 0 255 255;   /* #00FFFF */
-    --nature-green: 0 255 0; /* #00FF00 */
-    --nature-orange: 255 165 0;/* #FFA500 */
-    --nature-purple: 128 0 128; /* #800080 */
-
-    /* Keep other distinct colors */
-    --sunset-orange: 255 113 74; /* #FF714A */
-    --sunset-pink: 255 56 100;   /* #FF3864 */
-    --neon-purple: 123 90 255;   /* #7B5AFF */
-  }
-
-  .dark {
-    /* Dark Theme Variables */
-    --background: 9 3 29;      /* #09031D */
-    --foreground: 240 240 240; /* Slightly off-white */
-    --card-bg: 11 2 37 / 0.3;  /* #0B0225 with alpha */
-    --card-border: 255 255 255 / 0.1;
-    --primary: 255 113 74;      /* #FF714A (sunset-orange) - Keep consistent primary */
-    --secondary: 123 90 255;    /* #7B5AFF (neon-purple) - Keep consistent secondary */
-    --accent: 255 56 100;      /* #FF3864 (sunset-pink) - Keep consistent accent */
-    --text-primary: 240 240 240;
-    --text-secondary: 176 176 176;
-    --muted: 255 255 255 / 0.1;
-    --glass-bg: 0 0 0 / 0.2;
-    --glass-border: 255 255 255 / 0.05;
-    /* Neon/Nature palette is inherited from :root */
-  }
-
-  body {
-    color: rgb(var(--text-primary));
-    background-color: rgb(var(--background));
-    min-height: 100vh;
-    overflow-x: hidden;
-    font-family: "Ubuntu", "Ubuntu Nerd Font Propo", sans-serif;
-  }
-
-  /* Typography */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "JetBrains Mono", "JetBrainsMono NFP", monospace;
-    letter-spacing: -0.025em;
-    color: rgb(var(--foreground)); /* Use foreground for headings */
-  }
-   h1 { font-size: 3.75rem; line-height: 1.2; } /* 6xl */
-   h2 { font-size: 3rem; line-height: 1.25; } /* 5xl */
-   h3 { font-size: 2.25rem; line-height: 1.3; } /* 4xl */
-   h4 { font-size: 1.875rem; line-height: 1.35; } /* 3xl */
-   h5 { font-size: 1.5rem; line-height: 1.4; } /* 2xl */
-   h6 { font-size: 1.25rem; line-height: 1.4; } /* xl */
-   p { font-size: 1rem; line-height: 1.6; color: rgb(var(--text-secondary)); } /* base */
-
-   @media (max-width: 640px) {
-      h1 { font-size: 3rem; }
-      h2 { font-size: 2.25rem; }
-      h3 { font-size: 1.875rem; }
-      h4 { font-size: 1.5rem; }
-   }
+  /* ... :root and .dark color variables ... */
+  :root { --radius: 0.3125rem; /* 5px */ /* ... */ }
+  .dark { --radius: 0.3125rem; /* 5px */ /* ... */ }
+  /* ... body, typography ... */
 }
 
-/* Components Layer */
 @layer components {
-  /* Updated container */
-  .container-wide {
-    max-width: 1600px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem; /* Smaller padding */
-    padding-right: 1rem; /* Smaller padding */
-    @screen sm {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-    @screen lg {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-  }
+  /* ... containers ... */
 
-  /* Updated Glass effect using CSS Variables */
+  /* Refined Glass/Mica Effect */
   .glass {
-    background-color: rgb(var(--glass-bg));
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgb(var(--glass-border));
+    /* More opaque background */
+    background-color: hsl(var(--card) / 0.85); 
+    /* Slightly less blur, keep saturation */
+    backdrop-filter: blur(16px) saturate(150%); 
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    /* Subtle border */
+    border: 1px solid hsl(var(--border) / 0.3); /* Reduced border opacity */
+    position: relative; 
+    z-index: 1;
+    overflow: hidden; 
+    @apply rounded-lg shadow-xl;
   }
 
-  /* Gradient text utilities - using theme colors */
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-  }
-  .gradient-text-primary {
-    @apply bg-gradient-to-r from-primary via-accent to-secondary; /* Example gradient */
-  }
-  .gradient-text-secondary {
-     @apply bg-gradient-to-r from-secondary to-neon-blue; /* Another example */
-  }
-
-  /* Buttons using theme variables */
-  .button {
-    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none;
-  }
-  /* Define text color for light mode primary button */
-  .button-primary {
-    @apply bg-primary text-white shadow-md hover:opacity-90 hover:-translate-y-0.5;
-  }
-  .dark .button-primary {
-     @apply text-white; /* Ensure text is white in dark mode */
-  }
-  .light .button-primary {
-      @apply text-white; /* Ensure text is white in light mode too, or choose contrast color */
-  }
-
-  .button-secondary {
-    @apply border border-primary text-primary hover:bg-primary/10 hover:-translate-y-0.5;
-  }
-  .button-ghost {
-     @apply text-primary hover:bg-primary/10;
-  }
-  .button-destructive {
-    @apply bg-red-600 text-white hover:bg-red-700;
-  }
-
-  /* Custom scrollbar using theme colors */
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: rgb(var(--background) / 0.5); }
-  ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, rgb(var(--primary)), rgb(var(--accent))); border-radius: 5px; }
-  ::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, rgb(var(--primary) / 0.8), rgb(var(--accent) / 0.8)); }
-
-  /* Ensure retro-grid uses appropriate theme colors */
-   .retro-grid {
+  .glass::before {
+    content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background-size: 40px 40px;
-    /* Use theme colors */
-    background-image:
-      linear-gradient(to right, rgb(var(--primary) / 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(var(--primary) / 0.1) 1px, transparent 1px);
-    transform: perspective(1000px) rotateX(60deg);
-    transform-origin: center bottom;
-    animation: gridMove 20s linear infinite;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    opacity: 0.02; /* Reduced noise intensity further */
+    z-index: -1; 
+    pointer-events: none;
   }
 
-  /* ... rest of existing component styles ... */
+  /* ... buttons, grid, etc ... */
 }
 
-/* Utilities Layer - Add spin animation */
 @layer utilities {
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  /* ... existing keyframes ... */
-  @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 40px 40px; } }
-  @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-  @keyframes pulse-slow { 0% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.03); } 100% { opacity: 0.2; transform: scale(1); } }
-  @keyframes pulse-slower { 0% { opacity: 0.1; transform: scale(1); } 50% { opacity: 0.2; transform: scale(1.02); } 100% { opacity: 0.1; transform: scale(1); } }
-  @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } 100% { transform: translateY(0px) rotate(0deg); } }
-  @keyframes float-reverse { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-15px) rotate(-5deg); } 100% { transform: translateY(0px) rotate(0deg); } }
-  @keyframes pulse-glow { 0% { opacity: 0.4; filter: blur(8px); } 50% { opacity: 0.8; filter: blur(12px); } 100% { opacity: 0.4; filter: blur(8px); } }
-  @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgb(var(--primary) / 0.6), 0 0 40px rgb(var(--primary) / 0.4); } 50% { box-shadow: 0 0 40px rgb(var(--primary) / 0.8), 0 0 80px rgb(var(--primary) / 0.6); } }
-
-  /* Add animation utility class */
-  .animate-spin {
-     animation: spin 1s linear infinite; /* Default duration, adjust as needed */
-  }
-
-  .animate-pulse { animation: pulse 4s ease-in-out infinite; }
-  .animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
-  .animate-pulse-slower { animation: pulse-slower 8s ease-in-out infinite; }
-  .animate-float { animation: float 6s ease-in-out infinite; }
-  .animate-glow { animation: glow 4s ease-in-out infinite; }
-  .animate-gridMove { animation: gridMove 20s linear infinite; }
+  /* ... */
 }

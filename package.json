@@ -12,10 +12,13 @@
         "prepare": "husky install"
     },
     "dependencies": {
+        "@fontsource/ubuntu-sans": "^5.2.6",
+        "@headlessui/react": "^1.7.17",
         "@types/node": "^18.19.0",
         "@types/react": "^18.2.0",
         "@types/react-dom": "^18.2.0",
         "autoprefixer": "^10.4.16",
+        "clsx": "^2.0.0",
         "eslint": "^8.56.0",
         "eslint-config-next": "^13.5.6",
         "framer-motion": "^10.16.4",
@@ -25,27 +28,26 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-icons": "^5.5.0",
-        "tailwindcss": "^3.3.5",
-        "typescript": "^5.2.2",
-        "@headlessui/react": "^1.7.17",
         "sharp": "^0.32.6",
-        "clsx": "^2.0.0",
-        "tailwind-merge": "^2.0.0"
+        "tailwind-merge": "^2.0.0",
+        "tailwindcss": "^3.3.5",
+        "tailwindcss-animate": "^1.0.7",
+        "typescript": "^5.2.2"
     },
     "description": "A modern, naturewave-themed marketing agency website built with Next.js, TypeScript, and Tailwind CSS.",
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@commitlint/cli": "^17.0.0",
+        "@commitlint/config-conventional": "^17.0.0",
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "@typescript-eslint/parser": "^6.21.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.2.6",
-        "prettier": "^3.5.3",
-        "@commitlint/cli": "^17.0.0",
-        "@commitlint/config-conventional": "^17.0.0",
         "husky": "^8.0.0",
-        "lint-staged": "^15.0.2"
+        "lint-staged": "^15.0.2",
+        "prettier": "^3.5.3"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [

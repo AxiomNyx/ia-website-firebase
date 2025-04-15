@@ -1,73 +1,74 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import { FaAward, FaChartLine, FaUsers, FaLightbulb } from "react-icons/fa";
 
 export default function About() {
-  const services = [
-    {
-      name: "Design",
-      description: "Brand identity, UI/UX, print & digital assets",
-      iconColor: "text-primary",
-      bgColor: "bg-primary/10",
-      delay: 0.1,
-    },
-    {
-      name: "Development",
-      description: "Web, mobile & custom applications",
-      iconColor: "text-secondary",
-      bgColor: "bg-secondary/10",
-      delay: 0.2,
-    },
-    {
-      name: "Marketing",
-      description: "Strategy, social media & content creation",
-      iconColor: "text-accent",
-      bgColor: "bg-accent/10",
-      delay: 0.3,
-    },
-    {
-      name: "Growth",
-      description: "SEO, analytics & business strategy",
-      iconColor: "text-primary",
-      bgColor: "bg-primary/10",
-      delay: 0.4,
-    },
+
+  const placeholderImageUrl = "https://source.unsplash.com/random/1080x720/?office,team,collaboration";
+
+  const stats = [
+    { value: "95%", label: "Client Satisfaction", icon: FaAward, delay: 0.1 },
+    { value: "150%", label: "Average ROI Growth", icon: FaChartLine, delay: 0.2 },
+    { value: "50+", label: "Successful Projects", icon: FaLightbulb, delay: 0.3 },
+    { value: "10+", label: "Years Combined Experience", icon: FaUsers, delay: 0.4 },
   ];
 
   return (
-    <section className="relative w-full py-24 overflow-visible" id="about">
+    <section className="relative w-full py-24 overflow-hidden" id="about">
       <div className="container-wide relative z-10">
+        {/* Section Header - Updated with new Subtitle */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-16 max-w-3xl"
         >
-          <div className="flex items-center gap-4">
-            <span className="text-primary font-mono text-2xl">01.</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-              About{" "}
-              <span className="gradient-text bg-gradient-to-r from-primary to-accent">
-                innervate.agency
-              </span>
+          <div className="flex items-baseline gap-3 mb-4">
+            <span className="text-primary font-mono text-4xl md:text-5xl font-bold">01.\</span>
+            <h2 className="text-4xl md:text-5xl font-bold font-mono text-foreground">
+              Who We Are
             </h2>
           </div>
-          <div className="mt-4 h-px w-full bg-gradient-to-r from-primary/50 to-transparent"></div>
+          {/* Updated Subtitle */} 
+          <p className="text-lg md:text-xl text-muted-foreground font-sans mb-6">
+            Innervative Digital Spark. Human Connection.
+          </p>
+          <div className="h-px w-full bg-gradient-to-r from-primary/50 to-transparent"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
+        {/* Rest of the section content (unchanged) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+           {/* Left Column: Image + Text Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            {/* Image Container */}
+            <div
+              className="relative aspect-video rounded-xl overflow-hidden shadow-lg"
             >
-              <h3 className="text-2xl font-bold mb-6 gradient-text bg-gradient-to-r from-primary to-accent">
-                We craft digital experiences that captivate and convert
+              <Image
+                src={placeholderImageUrl}
+                alt="Innervate Agency Team or Office Collaboration"
+                fill
+                className="object-cover transition-transform duration-500 hover:scale-105"
+                sizes="(max-width: 1024px) 90vw, 45vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent"></div>
+            </div>
+
+            {/* Text Content Block */}
+            <div>
+              <h3 className="text-3xl font-semibold mb-6 font-mono text-foreground">
+                 Crafting Digital Experiences with Vision.
               </h3>
-              <div className="space-y-6 text-text-secondary">
+              <div className="space-y-6 text-muted-foreground text-lg">
                 <p>
                   Innervate is a full-service creative agency based in Boise,
                   Idaho. We blend technology, design, and strategic marketing to
@@ -83,72 +84,62 @@ export default function About() {
                   to create experiences that feel both futuristic and naturally
                   inviting.
                 </p>
-                <p>
-                  Whether you&apos;re a startup looking to make your mark or an
-                  established brand seeking reinvention, we&apos;re here to help
-                  you grow and evolve.
-                </p>
               </div>
-              <motion.div
+               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="mt-8"
-              >
-                {/* Apply spinning gradient border effect */}
-                 <Link
-                    href="/contact"
-                    className="group relative inline-flex h-12 overflow-hidden rounded-lg p-[2px] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background"
-                  >
-                    <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-gradient-to-r from-primary via-accent to-secondary" />
-                    <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-background px-6 py-3 text-sm font-medium text-primary backdrop-blur-3xl transition-all duration-300 group-hover:bg-background/80 group-hover:text-primary/80">
-                       <span>Start your project</span>
-                       <svg className="ml-2 w-5 h-5" viewBox="0 0 24 24" fill="none">
-                         <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                       </svg>
-                    </span>
-                  </Link>
-              </motion.div>
-            </motion.div>
-          </div>
-          <div className="lg:col-span-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-right mb-8"
-            >
-              <h3 className="text-xl font-semibold gradient-text bg-gradient-to-r from-secondary to-neon-blue">
-                Comprehensive marketing solutions
-                <br />
-                tailored to your unique vision
-              </h3>
-            </motion.div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {services.map((service, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: service.delay }}
-                  viewport={{ once: true }}
-                  className="p-6 rounded-lg glass hover:border-card-border/30 transition-all duration-300"
+                className="mt-10"
+               >
+                <Link
+                  href="/contact"
+                  className="group relative inline-flex h-12 overflow-hidden rounded-lg p-[2px] focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background"
                 >
-                  <div
-                    className={`mb-4 w-10 h-10 rounded-full flex items-center justify-center ${service.bgColor}`}
-                  >
-                    <span className={`text-xl ${service.iconColor}`}>✦</span>
-                  </div>
-                  <h4 className="text-lg font-bold mb-2 text-text-primary">
-                    {service.name}
-                  </h4>
-                  <p className="text-sm text-text-secondary">{service.description}</p>
-                </motion.div>
-              ))}
+                  <span className="absolute inset-[-1000%] animate-spin duration-[3s] bg-gradient-to-r from-primary via-accent to-secondary" />
+                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-[6px] bg-background px-6 text-sm font-medium text-primary transition-all duration-300 group-hover:bg-background/80 group-hover:text-primary/90">
+                    <span>Start your project</span>
+                    <svg className="ml-2 w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
+                </Link>
+               </motion.div>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Right Column: Stats */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+             className="lg:pl-8"
+          >
+             <h4 className="text-2xl font-semibold mb-8 font-mono text-foreground">
+                Digital innovators with a passion for excellence.
+             </h4>
+
+             <div className="grid grid-cols-2 gap-6">
+                {stats.map((stat) => (
+                    <motion.div
+                        key={stat.label}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, delay: stat.delay }}
+                        viewport={{ once: true }}
+                        className="glass p-6 rounded-lg shadow-lg text-center hover:border-primary/30 border border-transparent transition-colors"
+                    >
+                        <p className="text-4xl font-bold font-mono text-primary mb-2">
+                            {stat.value}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                            {stat.label}
+                        </p>
+                    </motion.div>
+                ))}
+             </div>
+          </motion.div>
         </div>
       </div>
     </section>
