@@ -1,25 +1,45 @@
-"use client";
 
+
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Hero() {
+  "use client";
+  const [parallaxValue, setParallaxValue] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setParallaxValue(window.scrollY / 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background Image Layer */} 
       <div className="absolute inset-0 w-full h-full z-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-transparent z-10"></div>
-        <Image
-          src="/images/innervate.agency-naturewavehero-homepage.png"
-          alt="Naturewave Landscape Background"
-          fill
-          className="object-cover object-center"
-          priority
-          sizes="100vw"
-          quality={90}
-        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-transparent"></div>
+        <motion.div
+          id="parallax-container"          
+          style={{
+            translateY: parallaxValue,
+          }}
+        >
+          <Image
+            src="/images/innervate.agency-naturewavehero-homepage.png"
+            alt="Naturewave Landscape Background"
+            fill
+            className="object-cover object-center scale-110"
+            priority
+            sizes="100vw"
+            quality={90}
+          />
+        </motion.div>
       </div>
 
       {/* Retro Grid Layer */} 
@@ -43,17 +63,37 @@ export default function Hero() {
             className="flex flex-col items-start" // Align inner elements left
           >
             {/* Pill Box */} 
-            <div className="inline-flex items-center gap-2 text-xs font-medium bg-foreground/10 backdrop-blur-sm text-white px-3 py-1 rounded-full border border-white/20 mb-4 shadow-sm">
-              <span>✨</span>
-              <span>Full-Stack Digital Marketing Agency</span>
-            </div>
-
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <div className="inline-flex items-center gap-2 text-xs font-medium bg-foreground/10 backdrop-blur-sm text-white px-3 py-1 rounded-full border border-white/20 mb-4 shadow-sm">
+                <span>✨</span>
+                <span>Full-Stack Digital Marketing Agency</span>
+              </div>
+            </motion.div>
             {/* Main Title */} 
-            <h1 className="text-5xl lg:text-6xl font-mono mb-2 text-white font-bold">
-              innervate<span className="font-bold">.agency</span>
-            </h1>
-            {/* Gradient Underline */} 
-            <div className="h-1.5 w-56 bg-gradient-to-r from-robotic-fluid-orange via-vaporwave-pink to-light-naturewave-purple rounded-full mb-5"></div>
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <h1 className="text-5xl lg:text-6xl font-mono mb-2 font-bold bg-clip-text text-transparent bg-gradient-to-r from-robotic-fluid-orange via-vaporwave-pink to-light-naturewave-purple animate-textGlow">
+                innervate<span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-robotic-fluid-orange via-vaporwave-pink to-light-naturewave-purple">
+                  .agency
+                </span>
+              </h1>
+            </motion.div>
+             {/* Gradient Underline */}
+             <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+            >
+              <div className="h-1.5 w-56 bg-gradient-to-r from-robotic-fluid-orange via-vaporwave-pink to-light-naturewave-purple rounded-full mb-5"></div>
+            </motion.div>
+
             
             {/* Subtitle */} 
             <h2 className="text-xl lg:text-2xl font-mono mb-4 text-white font-semibold">
@@ -62,7 +102,7 @@ export default function Hero() {
             
             {/* Paragraph */} 
             <p className="text-base lg:text-lg text-white/90 font-sans leading-normal max-w-xl mb-10">
-               Blending breathtaking landscapes with cutting-edge digital innovation to craft unique <span className="text-robotic-fluid-orange font-semibold">naturewave</span> experiences for your brand.
+               We combine the raw beauty of nature with advanced technology, creating <span className="text-robotic-fluid-orange font-semibold">naturewave</span> experiences that elevate your brand online.
             </p>
           </motion.div>
 
@@ -94,3 +134,4 @@ export default function Hero() {
     </section>
   );
 }
+

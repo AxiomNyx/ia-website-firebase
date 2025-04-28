@@ -127,7 +127,15 @@
 
   /* Buttons */
   .button {
-    @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    transition: all 0.3s ease-in-out;
+    transform: scale(1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  .button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   }
   .button-primary { @apply bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2; }
   .button-secondary { @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2; }
@@ -159,4 +167,28 @@
 
 @layer utilities {
   /* ... Keyframes & Animations ... */
+  @keyframes pulse-neon {
+    0% {
+      box-shadow: 0 0 5px hsla(var(--robotic-fluid-orange), 0.6), 0 0 10px hsla(var(--vaporwave-pink), 0.4), 0 0 15px hsla(var(--light-naturewave-purple), 0.2);
+    }
+    50% {
+      box-shadow: 0 0 10px hsla(var(--robotic-fluid-orange), 0.8), 0 0 15px hsla(var(--vaporwave-pink), 0.6), 0 0 20px hsla(var(--light-naturewave-purple), 0.4);
+    }
+    100% {
+      box-shadow: 0 0 5px hsla(var(--robotic-fluid-orange), 0.6), 0 0 10px hsla(var(--vaporwave-pink), 0.4), 0 0 15px hsla(var(--light-naturewave-purple), 0.2);
+    }
+  } 
+  @keyframes textGlow {
+    0% {
+      text-shadow: 0 0 5px hsla(var(--robotic-fluid-orange), 0.6), 0 0 10px hsla(var(--vaporwave-pink), 0.4), 0 0 15px hsla(var(--light-naturewave-purple), 0.2);
+    }
+    50% {
+      text-shadow: 0 0 10px hsla(var(--robotic-fluid-orange), 0.8), 0 0 15px hsla(var(--vaporwave-pink), 0.6), 0 0 20px hsla(var(--light-naturewave-purple), 0.4);
+    }
+    100% {
+      text-shadow: 0 0 5px hsla(var(--robotic-fluid-orange), 0.6), 0 0 10px hsla(var(--vaporwave-pink), 0.4), 0 0 15px hsla(var(--light-naturewave-purple), 0.2);
+    }
+  }
+  .animate-textGlow{ animation: textGlow 2s ease-in-out infinite; }
 }
+

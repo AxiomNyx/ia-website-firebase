@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 // Import Ubuntu and JetBrains_Mono from next/font/google
-import { Ubuntu, JetBrains_Mono } from "next/font/google"; 
+import { JetBrains_Mono, Ubuntu } from "next/font/google";
 import "./globals.css";
+import CustomHead from "@/components/common/CustomHead";
 import RootLayoutWrapper from "@/components/layout/RootLayoutWrapper";
-
 // Load Ubuntu font (handles variants like Sans)
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -48,13 +48,11 @@ export default function RootLayout({
       // Apply font variables to the html tag
       className={`${ubuntu.variable} ${jetbrains.variable}`}
     >
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
+        <CustomHead metadata={metadata}/>
       {/* Apply the sans font variable as the default body font */}
+
        <body className="font-sans">
-        <RootLayoutWrapper ubuntu={ubuntu} jetbrains={jetbrains}>
+        <RootLayoutWrapper ubuntu={ubuntu} jetbrains={jetbrains}>   
           {children}
         </RootLayoutWrapper>
       </body>

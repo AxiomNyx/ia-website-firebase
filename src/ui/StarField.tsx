@@ -50,7 +50,7 @@ export default function StarField({
         .map(() => ({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 0.8, // Even smaller stars
+          size: Math.random() * 1.5, // Increased maximum star size
           speed: Math.random() * speed + 0.05,
         }));
     };
