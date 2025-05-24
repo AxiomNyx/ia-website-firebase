@@ -1,15 +1,13 @@
-
-
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+"use client";
+import React from "react";
+import * as framerMotion from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Hero() {
-  "use client";
-  const [parallaxValue, setParallaxValue] = useState(0);
+  const [parallaxValue, setParallaxValue] = React.useState(0);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleScroll = () => {
       setParallaxValue(window.scrollY / 10);
     };
@@ -24,7 +22,7 @@ export default function Hero() {
       {/* Background Image Layer */} 
       <div className="absolute inset-0 w-full h-full z-0">
         <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-transparent"></div>
-        <motion.div
+        <framerMotion.motion.div
           id="parallax-container"          
           style={{
             translateY: parallaxValue,
@@ -39,7 +37,7 @@ export default function Hero() {
             sizes="100vw"
             quality={90}
           />
-        </motion.div>
+        </framerMotion.motion.div>
       </div>
 
       {/* Retro Grid Layer */} 
@@ -56,14 +54,14 @@ export default function Hero() {
       >
          {/* Inner div for text content, naturally aligns left */} 
         <div className="text-left max-w-3xl"> 
-          <motion.div
+          <framerMotion.motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-start" // Align inner elements left
           >
             {/* Pill Box */} 
-            <motion.div
+            <framerMotion.motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
@@ -72,9 +70,9 @@ export default function Hero() {
                 <span>✨</span>
                 <span>Full-Stack Digital Marketing Agency</span>
               </div>
-            </motion.div>
+            </framerMotion.motion.div>
             {/* Main Title */} 
-            <motion.div
+            <framerMotion.motion.div
               initial={{ opacity: 0, y: 30, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -84,15 +82,15 @@ export default function Hero() {
                   .agency
                 </span>
               </h1>
-            </motion.div>
+            </framerMotion.motion.div>
              {/* Gradient Underline */}
-             <motion.div
+             <framerMotion.motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
             >
               <div className="h-1.5 w-56 bg-gradient-to-r from-robotic-fluid-orange via-vaporwave-pink to-light-naturewave-purple rounded-full mb-5"></div>
-            </motion.div>
+            </framerMotion.motion.div>
 
             
             {/* Subtitle */} 
@@ -104,10 +102,10 @@ export default function Hero() {
             <p className="text-base lg:text-lg text-white/90 font-sans leading-normal max-w-xl mb-10">
                We combine the raw beauty of nature with advanced technology, creating <span className="text-robotic-fluid-orange font-semibold">naturewave</span> experiences that elevate your brand online.
             </p>
-          </motion.div>
+          </framerMotion.motion.div>
 
           {/* Buttons - Aligned Start */} 
-          <motion.div
+          <framerMotion.motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
@@ -128,7 +126,7 @@ export default function Hero() {
             >
               View Our Work
             </Link>
-          </motion.div>
+          </framerMotion.motion.div>
         </div>
       </div>
     </section>

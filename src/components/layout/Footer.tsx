@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function Footer() {
@@ -40,17 +41,21 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="relative"
+            className="relative group"
           >
             <Link
               href="/"
-              className="text-2xl tracking-wide font-mono relative group overflow-hidden inline-block"
+              className="text-2xl tracking-wide font-mono relative overflow-hidden inline-block"
             >
               <span className="font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-brand-magenta via-neon-blue to-brand-yellow">
                 innervate
               </span>
               <span className="text-white font-light">.agency</span>
             </Link>
+            {/* Added subtle animation */}
+            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-neon-blue to-brand-magenta origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+
+
 
             {/* Decorative element */}
             <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
@@ -69,11 +74,11 @@ export default function Footer() {
           >
             <div className="flex flex-col h-full">
               <h3 className="text-white text-sm font-medium uppercase tracking-wider mb-4">
-                About Us
+                Our Philosophy
               </h3>
               <p className="text-gray-400 text-sm max-w-md mb-6">
-                Where nature meets digital innovation. Full-stack marketing
-                solutions with a naturewave aesthetic, inspired by the stunning
+                We believe in clear, honest communication and marketing that
+                actually connects. We offer full-stack marketing solutions with a naturewave aesthetic, inspired by the stunning
                 landscapes of Southern Idaho. We blend modern design with
                 organic elements.
               </p>
@@ -144,15 +149,15 @@ export default function Footer() {
           </motion.div>
 
           {/* Links columns with Windows 11 style */}
-          <motion.div
+          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="md:col-span-3"
+            className="md:col-span-2"
           >
             <div className="p-6 rounded-xl bg-white/[0.02] backdrop-blur-md border border-white/[0.05]">
-              <h3 className="text-white text-sm font-medium uppercase tracking-wider mb-4">
+              <h3 className="text-white text-sm font-medium uppercase tracking-wider mb-6">
                 Site Map
               </h3>
               <ul className="space-y-2.5">
@@ -163,9 +168,9 @@ export default function Footer() {
                         href={`/${item.toLowerCase()}`}
                         className="text-gray-400 hover:text-white transition-colors duration-200 text-sm relative group flex items-center"
                       >
-                        <span className="absolute left-0 w-0 h-px bg-gradient-to-r from-neon-blue to-brand-magenta group-hover:w-4 transition-all duration-200"></span>
+                        <span className="absolute -left-4 w-0 h-px bg-gradient-to-r from-neon-blue to-brand-magenta group-hover:w-6 transition-all duration-200"></span>
                         <span className="group-hover:translate-x-5 transition-transform duration-200 block">
-                          {item}
+                          {item === "Portfolio" ? "Work" : item} {/* Changed Portfolio to Work */}
                         </span>
                       </Link>
                     </li>
@@ -177,11 +182,11 @@ export default function Footer() {
 
           {/* Resources column */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 20 }} // Adjusted delay
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
             viewport={{ once: true }}
-            className="md:col-span-2"
+            className="md:col-span-3"
           >
             <div className="p-6 rounded-xl bg-white/[0.02] backdrop-blur-md border border-white/[0.05]">
               <h3 className="text-white text-sm font-medium uppercase tracking-wider mb-4">
@@ -193,7 +198,7 @@ export default function Footer() {
                     <Link
                       href={`/${item.toLowerCase()}`}
                       className="text-gray-400 hover:text-white transition-colors duration-200 text-sm relative group"
-                    >
+                    > 
                       <span className="absolute -left-4 top-1/2 transform -translate-y-1/2 w-0 h-0.5 bg-brand-magenta group-hover:w-3 transition-all duration-200 opacity-0 group-hover:opacity-100"></span>
                       <span>{item}</span>
                     </Link>
@@ -205,9 +210,9 @@ export default function Footer() {
 
           {/* Social column with enhanced styling */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 20 }} // Adjusted delay
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
             className="md:col-span-2"
           >

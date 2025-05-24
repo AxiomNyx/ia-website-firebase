@@ -6,9 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import { FaBars, FaTimes } from "react-icons/fa";
+import MegaMenu from "../layout/MegaMenu"; // Import the MegaMenu component
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(
+    null,
+  );
   const pathname = usePathname();
 
   useEffect(() => {
@@ -18,10 +23,20 @@ export default function Navbar() {
   const navItems = [
     { name: "Home", href: "/" },
     { name: "Work", href: "/work" },
-    { name: "Services", href: "/services" },
+    { name: "Services", href: "/services", hasMegaMenu: true }, // Added hasMegaMenu
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
+
+  const handleMouseEnterServices = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+    }
+    setIsMegaMenuOpen(true);
+  };
+  const handleMouseLeaveServices = () => {
+    setHoverTimeout(setTimeout(() => setIsMegaMenuOpen(false), 300)); // Added a delay for a smoother transition
+  };
 
   const NavLinks = ({ isMobile = false }: { isMobile?: boolean }) => (
     <div
@@ -29,23 +44,45 @@ export default function Navbar() {
     >
       {navItems.map((item) => (
         <Link
-          key={item.name}
-          href={item.href}
-          className={`relative py-1 text-sm font-medium transition-colors ${
-            pathname === item.href
-              ? "text-foreground"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
+          key={item.name} // Added key prop
+          href={item.href} // Added href prop
+          className={`relative py-1 text-sm font-medium transition-colors ${pathname === item.href ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`} // Moved className to Link
+          onMouseEnter={() => {
+            if (item.hasMegaMenu) {
+              handleMouseEnterServices();
+            }
+          }}
+          onMouseLeave={() => {
+            if (item.hasMegaMenu) handleMouseLeaveServices();
+          }}
         >
-          {item.name}
-          {pathname === item.href && (
-            <motion.div
-              layoutId="navbar-indicator"
-              className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary rounded-lg"
-              initial={false}
-              transition={{ type: "spring", stiffness: 500, damping: 30 }}
-            />
-          )}
+          <div className="flex items-center">
+            {item.name}
+            {item.hasMegaMenu && (
+              <svg
+                className={`ml-1 w-3 h-3 transition-transform ${isMegaMenuOpen ? "rotate-180" : ""}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            )}
+            {pathname === item.href && (
+              <motion.div
+                layoutId="navbar-indicator"
+                className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary rounded-lg"
+                initial={false}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              />
+            )}
+          </div>
         </Link>
       ))}
     </div>
@@ -114,6 +151,27 @@ export default function Navbar() {
             id="mobile-menu"
           >
             <NavLinks isMobile={true} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mega Menu */}
+      <AnimatePresence>
+        {isMegaMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }} // Fixed exit animation property
+            onMouseEnter={() => {
+              if (hoverTimeout) {
+                clearTimeout(hoverTimeout);
+              }
+            }}
+            onMouseLeave={() => {
+              handleMouseLeaveServices();
+            }}
+            transition={{ duration: 0.2 }}>
+            <MegaMenu /> {/* Render the MegaMenu component */}
           </motion.div>
         )}
       </AnimatePresence>
